@@ -1,0 +1,3 @@
+name: FreepixelGuild
+version: '${project.version}'
+main: com.codris.FreepixelGuild
