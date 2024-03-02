@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 
 public class GuildCommand extends Command {
     public GuildCommand() {
-        super("guild");
+        super("guild", "system.default", "g");
     }
 
     @Override
