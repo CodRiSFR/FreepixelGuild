@@ -1,10 +1,7 @@
 package com.codris;
 
 import com.codris.database.GuildDatabase;
-import com.codris.features.Color;
-import com.codris.features.Guild;
-import com.codris.features.GuildCommand;
-import com.codris.features.GuildListener;
+import com.codris.features.*;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.config.Configuration;
@@ -29,10 +26,11 @@ public final class FreepixelGuild extends Plugin {
         System.out.println("------------------------------------");
 
         ProxyServer.getInstance().getPluginManager().registerCommand(this, new GuildCommand());
+        ProxyServer.getInstance().getPluginManager().registerCommand(this, new ChatCommand());
         getProxy().registerChannel("freepixelguilds:tag");
         ProxyServer.getInstance().getPluginManager().registerListener(this, new GuildListener());
 
-        getDataFolder().mkdirs();
+        if (!getDataFolder().exists()) getDataFolder().mkdirs();
         try {
             Configuration configuration = ConfigurationProvider.getProvider(YamlConfiguration.class).load(new File(getDataFolder(), "config.yml"));
             MONGO_URI = configuration.getString("mongo-uri");
@@ -59,7 +57,8 @@ public final class FreepixelGuild extends Plugin {
                 if (!guild.containsKey("open")) g.setOpen(false);
                 if (!guild.containsKey("publicDiscord")) g.setPublicDiscord(false);
                 if (!guild.containsKey("discord")) g.setDiscord("none");
-                if (!Color.getUnlockedColors(UUID.fromString(g.getLeader()), g).contains(Color.getTagColorByCode(g.getTagColor()).name()) && !(Color.getTagColorByCode(g.getTagColor()).getRequirement() == null)) g.setTagColor("7");
+                if (!Color.getUnlockedColors(UUID.fromString(g.getLeader()), g).contains(Color.getTagColorByCode(g.getTagColor()).name()) && !(Color.getTagColorByCode(g.getTagColor()).getRequirement() == null))
+                    g.setTagColor("7");
             });
         }).start();
     }

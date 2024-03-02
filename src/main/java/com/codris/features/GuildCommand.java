@@ -24,14 +24,18 @@ public class GuildCommand extends Command {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        handle((ProxiedPlayer) sender, args);
+        if(sender instanceof ProxiedPlayer) {
+            handle((ProxiedPlayer) sender, args);
+        } else {
+            sender.sendMessage(Utilities.trans("&cThis command can only be executed by a player!"));
+        }
     }
 
-    private static Pattern p = Pattern.compile("^[a-zA-Z0-9]*$");
+    private static final Pattern p = Pattern.compile("^[a-zA-Z0-9]*$");
 
     public static HashMap<ProxiedPlayer, ProxiedPlayer> PENDING_INVITES = new HashMap<>();
     public static HashMap<ProxiedPlayer, Guild> PENDING_REQUESTS = new HashMap<>();
-    private static Map<UUID, Long> cooldown = new HashMap<>();
+    public static final Map<UUID, Long> cooldown = new HashMap<>();
 
     public static void handle(ProxiedPlayer player, String[] args) {
         if (cooldown.containsKey(player.getUniqueId())) {
