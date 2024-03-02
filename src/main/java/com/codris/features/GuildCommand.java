@@ -64,7 +64,6 @@ public class GuildCommand extends Command {
                 player.sendMessage("§e/guild kick <player> <reason> §8- §bKicks the player from your guild");
                 player.sendMessage("§e/guild leave §8- §bLeaves your current guild");
                 player.sendMessage("§e/guild motd §8- §bModifies the MOTD for the Guild");
-                player.sendMessage("§e/guild mute <time> §8- §bMutes a player or the whole guild");
                 player.sendMessage("§e/guild online §8- §bShow the current online members of your guild");
                 player.sendMessage("§e/guild rename <name> §8- §bRenames the Guild");
                 player.sendMessage("§e/guild tag §8- §bSets the guild [TAG]");
@@ -94,7 +93,6 @@ public class GuildCommand extends Command {
                         player.sendMessage("§e/guild kick <player> <reason> §8- §bKicks the player from your guild");
                         player.sendMessage("§e/guild leave §8- §bLeaves your current guild");
                         player.sendMessage("§e/guild motd §8- §bModifies the MOTD for the Guild");
-                        player.sendMessage("§e/guild mute <time> §8- §bMutes a player or the whole guild");
                         player.sendMessage("§e/guild online §8- §bShow the current online members of your guild");
                         player.sendMessage("§e/guild rename <name> §8- §bRenames the Guild");
                         player.sendMessage("§e/guild tag §8- §bSets the guild [TAG]");
