@@ -39,42 +39,15 @@ public class Utilities {
     }
 
     public static String getRankFromPlayer(ProxiedPlayer player) {
-        if (player.hasPermission("rank.owner"))
-            return ChatColor.RED + "[OWNER]";
-        if (player.hasPermission("rank.deputy"))
-            return ChatColor.RED + "[DEPUTY]";
-        if (player.hasPermission("rank.curator"))
-            return ChatColor.RED + "[CURATOR]";
-        if (player.hasPermission("rank.admin"))
-            return ChatColor.RED + "[ADMIN]";
-        if (player.hasPermission("rank.gm"))
-            return ChatColor.DARK_GREEN + "[GM]";
-        if (player.hasPermission("rank.mod"))
-            return ChatColor.DARK_GREEN + "[MOD]";
-        if (player.hasPermission("rank.helper"))
-            return ChatColor.BLUE + "[HELPER]";
-        if (player.hasPermission("rank.jrhelper"))
-            return ChatColor.BLUE + "[JR.HELPER]";
-        if (player.hasPermission("rank.bt"))
-            return ChatColor.LIGHT_PURPLE + "[BT]";
-        if (player.hasPermission("rank.sponser"))
-            return ChatColor.LIGHT_PURPLE + "[SPONSER]";
-        if (player.hasPermission("rank.pig"))
-            return ChatColor.LIGHT_PURPLE + "[PIG]";
-        if (player.hasPermission("rank.youtube"))
-            return ChatColor.RED + "[" + ChatColor.WHITE + "YOUTUBE" + ChatColor.RED + "]";
-        if (player.hasPermission("rank.mvp++"))
-            return ChatColor.GOLD + "[MVP" + ChatColor.RED + "++" + ChatColor.GOLD + "]";
-        if (player.hasPermission("rank.mvp+"))
-            return ChatColor.AQUA + "[MVP" + ChatColor.RED + "+" + ChatColor.AQUA + "]";
-        if (player.hasPermission("rank.mvp"))
-            return ChatColor.AQUA + "[MVP]";
-        if (player.hasPermission("rank.vip+"))
-            return ChatColor.GREEN + "[VIP" + ChatColor.GOLD + "+" + ChatColor.GREEN + "]";
-        if (player.hasPermission("rank.vip"))
-            return ChatColor.GREEN + "[VIP]";
-        if (player.hasPermission("rank.default"))
-            return "&7";
-        return null;
+        final Rank rank = Rank.findRankByPermission(player);
+        return Utilities.trans(rank.getPrefix());
+    }
+
+    public static String trans(final String s) {
+        return ChatColor.translateAlternateColorCodes('&', s);
+    }
+
+    static {
+        COMMA_FORMAT.setGroupingUsed(true);
     }
 }
