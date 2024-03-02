@@ -30,7 +30,24 @@ public final class FreepixelGuild extends Plugin {
         getProxy().registerChannel("freepixelguilds:tag");
         ProxyServer.getInstance().getPluginManager().registerListener(this, new GuildListener());
 
-        if (!getDataFolder().exists()) getDataFolder().mkdirs();
+        if (!getDataFolder().exists()) {
+            getDataFolder().mkdirs();
+        }
+        File configFile = new File(getDataFolder(), "config.yml");
+        Configuration config;
+
+        try {
+            if (!configFile.exists()) {
+                configFile.createNewFile();
+                config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(configFile);
+                config.set("mongo-uri", "mongodb://localhost");
+                ConfigurationProvider.getProvider(YamlConfiguration.class).save(config, configFile);
+            } else {
+                config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(configFile);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         try {
             Configuration configuration = ConfigurationProvider.getProvider(YamlConfiguration.class).load(new File(getDataFolder(), "config.yml"));
             MONGO_URI = configuration.getString("mongo-uri");
